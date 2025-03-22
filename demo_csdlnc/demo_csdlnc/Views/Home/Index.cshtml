@@ -23,9 +23,33 @@
                         </div>
                     </div>
                     <ul class="navbar-nav d-flex align-items-center  justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard">Online Builder</a>
-                        </li>
+                        @if (Context.Session.GetString("Username") != null)
+                        {
+                            
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="nav-link text-primary fw-bold">
+                                    👤 @Context.Session.GetString("Username") - (@Context.Session.GetString("Role"))
+                                </span>
+                                <a class="btn btn-outline-danger btn-sm mb-0 me-3" href="/Auth/Logout">Đăng xuất</a>
+
+                                    @if (Context.Session.GetString("Role") == "Admin")
+                                    {
+                                    <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="/sinhvien/index">Sinh Viên</a>
+                                    <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="/nguoixetduyet/index">Người Xét Duyệt</a>
+                                    }
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="btn btn-outline-primary btn-sm mb-0 me-3" href="/Auth/Login">Đăng nhập</a>                  
+                            </li>
+                        }
+                      
+
+
+                      
                         <li class="mt-1">
                             <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
                         </li>
@@ -126,6 +150,7 @@
             </div>
         </nav>
         <!-- End Navbar -->
+
         <div class="container-fluid py-2">
             <div class="row">
                 <div class="ms-3">
@@ -133,6 +158,50 @@
                     <p class="mb-4">
                         Check the sales, value and bounce rate by country.
                     </p>
+                </div>
+                <div class="container mt-4">
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <div class="card text-center shadow-lg p-4 border-0">
+                                <div class="card-body">
+                                    <i class="fas fa-user-graduate fa-3x text-primary"></i>
+                                    <h5 class="card-title mt-3 fw-bold">Sinh Viên</h5>
+                                    <p class="card-text text-muted">Quản lý thông tin sinh viên.</p>
+                                    <a href="/sinhvien/index" class="btn btn-outline-primary">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center shadow-lg p-4 border-0">
+                                <div class="card-body">
+                                    <i class="fas fa-user-check fa-3x text-success"></i>
+                                    <h5 class="card-title mt-3 fw-bold">Người Xét Duyệt</h5>
+                                    <p class="card-text text-muted">Danh sách người xét duyệt.</p>
+                                    <a href="/nguoixetduyet/index" class="btn btn-outline-success">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center shadow-lg p-4 border-0">
+                                <div class="card-body">
+                                    <i class="fas fa-book fa-3x text-warning"></i>
+                                    <h5 class="card-title mt-3 fw-bold">Tiêu Chí</h5>
+                                    <p class="card-text text-muted">Danh sách tiêu chí đánh giá.</p>
+                                    <a href="/tieuchi/index" class="btn btn-outline-warning">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center shadow-lg p-4 border-0">
+                                <div class="card-body">
+                                    <i class="fas fa-chart-line fa-3x text-danger"></i>
+                                    <h5 class="card-title mt-3 fw-bold">Thống Kê</h5>
+                                    <p class="card-text text-muted">Xem báo cáo và thống kê.</p>
+                                    <a href="/thongke/index" class="btn btn-outline-danger">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
