@@ -97,7 +97,8 @@ namespace demo_csdlnc.Migrations
 
                     b.Property<string>("NamHoc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("XepLoai")
                         .IsRequired()
@@ -142,7 +143,8 @@ namespace demo_csdlnc.Migrations
 
                     b.Property<string>("TenLop")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("MaLop");
 
@@ -165,7 +167,8 @@ namespace demo_csdlnc.Migrations
 
                     b.Property<string>("HoTen")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("MaAccount")
                         .HasColumnType("int");
@@ -236,7 +239,8 @@ namespace demo_csdlnc.Migrations
 
                     b.Property<string>("TenHoatDong")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("MaThamGia");
 
@@ -255,11 +259,13 @@ namespace demo_csdlnc.Migrations
 
                     b.Property<string>("MoTa")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("TenTieuChi")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("MaTieuChi");
 
@@ -285,7 +291,8 @@ namespace demo_csdlnc.Migrations
 
                     b.Property<string>("NhanXet")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("MaDanhGia");
 

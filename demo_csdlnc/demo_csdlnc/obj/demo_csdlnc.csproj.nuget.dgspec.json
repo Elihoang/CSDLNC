@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj": {}
+    "C:\\Users\\FPT\\Downloads\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj": {}
   },
   "projects": {
-    "D:\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj": {
+    "C:\\Users\\FPT\\Downloads\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj",
+        "projectUniqueName": "C:\\Users\\FPT\\Downloads\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj",
         "projectName": "demo_csdlnc",
-        "projectPath": "D:\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj",
-        "packagesPath": "C:\\Users\\dungt\\.nuget\\packages\\",
-        "outputPath": "D:\\demo_csdlnc\\demo_csdlnc\\obj\\",
+        "projectPath": "C:\\Users\\FPT\\Downloads\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc.csproj",
+        "packagesPath": "C:\\Users\\FPT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\FPT\\Downloads\\demo_csdlnc\\demo_csdlnc\\demo_csdlnc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dungt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\FPT\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -69,6 +69,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.3, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -90,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
