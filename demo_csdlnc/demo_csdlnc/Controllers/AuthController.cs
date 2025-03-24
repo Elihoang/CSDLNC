@@ -27,16 +27,11 @@ namespace demo_csdlnc.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
             if (await _context.Accounts.AnyAsync(a => a.Username == model.Username))
             {
                 ModelState.AddModelError("", "Username đã tồn tại!");
                 return View(model);
             }
-
-            // Mã hóa mật khẩu
             string hashedPassword = HashPassword(model.Password);
 
             var account = new Account
@@ -49,8 +44,40 @@ namespace demo_csdlnc.Controllers
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
+            if (model.Role == "SinhVien")
+            {
+                var sinhVien = new SinhVien
+                {
+                    HoTen = "",
+                    NgaySinh = DateTime.Today,
+                    GioiTinh = true,
+                    Email = "",
+                    SoDienThoai = "",
+                    MaLop = 1,
+                    MaAccount = account.MaAccount 
+                };
+
+                _context.SinhViens.Add(sinhVien);
+            }
+
+            else if (model.Role == "NguoiXetDuyet")
+            {
+                var nguoiXetDuyet = new NguoiXetDuyet
+                {
+                    HoTen = "",
+                    Email = "",
+                    SoDienThoai = "",
+                    MaAccount = account.MaAccount
+                };
+
+                _context.NguoiXetDuyets.Add(nguoiXetDuyet);
+            }
+            
+            await _context.SaveChangesAsync();
             return RedirectToAction("Login");
+
         }
+
 
         // Hiển thị trang đăng nhập
         [HttpGet]
@@ -76,6 +103,7 @@ namespace demo_csdlnc.Controllers
             // Lưu thông tin đăng nhập vào Session
             HttpContext.Session.SetString("Username", account.Username);
             HttpContext.Session.SetString("Role", account.Role);
+            HttpContext.Session.SetInt32("MaAccount", account.MaAccount);
 
             return RedirectToAction("Index", "Home");
         }

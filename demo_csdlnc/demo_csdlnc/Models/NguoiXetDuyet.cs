@@ -24,6 +24,6 @@ namespace demo_csdlnc.Models
         public int MaAccount { get; set; }
 
         [ForeignKey("MaAccount")]
-        public Account? Account { get; set; }
+        public Account Account { get; set; }
     }
 }
