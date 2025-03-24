@@ -1,29 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using demo_csdlnc.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace demo_csdlnc.Models
+public class TieuChiSinhVien
 {
-    public class TieuChiSinhVien
-    {
-        [Key]
-        public int MaDanhGia { get; set; }
+    [Key]
+    public int MaDanhGia { get; set; }
 
-        [Required(ErrorMessage = "Mã sinh viên không được để trống")]
-        public int MaSV { get; set; }
+    [Required(ErrorMessage = "Mã sinh viên không được để trống")]
+    public int MaSV { get; set; }
 
-        [Required(ErrorMessage = "Mã tiêu chí không được để trống")]
-        public int MaTieuChi { get; set; }
+    [Required(ErrorMessage = "Mã tiêu chí không được để trống")]
+    public int MaTieuChi { get; set; }
 
-        [Range(0, 100, ErrorMessage = "Điểm phải nằm trong khoảng 0 - 100")]
-        public int Diem { get; set; }
+    [Range(0, 100, ErrorMessage = "Điểm phải nằm trong khoảng 0 - 100")]
+    public int Diem { get; set; } 
 
-        [StringLength(500, ErrorMessage = "Nhận xét không được vượt quá 500 ký tự")]
-        public string NhanXet { get; set; }
+    [StringLength(500, ErrorMessage = "Nhận xét không được vượt quá 500 ký tự")]
+    public string NhanXet { get; set; }
 
-        [ForeignKey("MaSV")]
-        public SinhVien SinhVien { get; set; }
+    [StringLength(500, ErrorMessage = "Minh chứng không được vượt quá 500 ký tự")]
+    public string MinhChung { get; set; } 
 
-        [ForeignKey("MaTieuChi")]
-        public TieuChi TieuChi { get; set; }
-    }
+    // 🔹 Khóa ngoại
+    [ForeignKey("MaSV")]
+    public SinhVien? SinhVien { get; set; }
+
+    [ForeignKey("MaTieuChi")]
+    public TieuChi? TieuChi { get; set; }
 }

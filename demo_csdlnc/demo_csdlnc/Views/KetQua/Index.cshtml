@@ -1,0 +1,74 @@
+﻿@model IEnumerable<demo_csdlnc.Models.KetQua>
+
+@{
+    ViewData["Title"] = "Danh sách Kết Quả";
+    var role = Context.Session.GetString("Role");
+}
+
+<h1 class="mb-4">Danh sách Kết Quả</h1>
+
+<p>
+    @if (ViewBag.Role == "SinhVien")
+    {
+        <a asp-action="Create" class="btn btn-primary">Đăng ký</a>
+    }
+    else
+    {
+        <a asp-action="Create" class="btn btn-success">Thêm mới</a>
+    }
+</p>
+
+
+<table class="table table-bordered table-striped text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SinhVien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NamHoc)
+            </th>
+            <th>
+               @Html.DisplayNameFor(model => model.XepLoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GhiChu)
+            </th>
+           
+            <th>
+              @Html.DisplayNameFor(model => model.NguoiXetDuyet)
+            </th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SinhVien.HoTen)</td>
+                <td>@Html.DisplayFor(modelItem => item.NamHoc)</td>
+                <td>
+                    @if (item.XepLoai == "Đạt")
+                    {
+                        <span class="text-success fw-bold">@item.XepLoai</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger fw-bold">@item.XepLoai</span>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.GhiChu)</td>
+                <td>@Html.DisplayFor(modelItem => item.NguoiXetDuyet.HoTen)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.MaKetQua" class="btn btn-info btn-sm">Chi tiết</a>
+
+                    @if (role == "Admin" || role == "NguoiXetDuyet")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.MaKetQua" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@item.MaKetQua" class="btn btn-danger btn-sm">Xóa</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

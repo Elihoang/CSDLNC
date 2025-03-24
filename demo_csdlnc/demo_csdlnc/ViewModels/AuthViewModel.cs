@@ -12,7 +12,8 @@ namespace demo_csdlnc.Models
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; } = "SinhVien"; // Mặc định là SinhVien
+        public string Role { get; set; } = "SinhVien";
+        public int? MaLop { get; set; }
     }
 
     public class LoginViewModel

@@ -1,0 +1,41 @@
+﻿@model demo_csdlnc.Models.KetQua
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="mb-4">Chi tiết Kết Quả</h1>
+
+<div class="card shadow-sm p-4">
+    <h4 class="mb-3">Thông tin Kết Quả</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NamHoc)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.NamHoc)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.XepLoai)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.XepLoai)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.GhiChu)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.GhiChu)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.SinhVien)</dt>
+        <dd class="col-sm-9">
+            <strong>@Html.DisplayFor(model => model.SinhVien.HoTen)</strong>
+            <br />
+            <small class="text-muted">@Html.DisplayFor(model => model.SinhVien.Email)</small>
+        </dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NguoiXetDuyet)</dt>
+        <dd class="col-sm-9">
+            <strong>@Html.DisplayFor(model => model.NguoiXetDuyet.HoTen)</strong>
+            <br />
+            <small class="text-muted">@Html.DisplayFor(model => model.NguoiXetDuyet.Email)</small>
+        </dd>
+    </dl>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.MaKetQua" class="btn btn-primary">Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

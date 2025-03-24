@@ -1,16 +1,19 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using demo_csdlnc.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace demo_csdlnc.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    
+    public HomeController(ILogger<HomeController> logger, AppDbContext context)
     {
         _logger = logger;
+        
     }
 
     public IActionResult Index()
@@ -20,8 +23,9 @@ public class HomeController : Controller
 
         ViewBag.Username = username;
         ViewBag.Role = role;
-
+       
         return View();
+        
     }
 
     public IActionResult Privacy()

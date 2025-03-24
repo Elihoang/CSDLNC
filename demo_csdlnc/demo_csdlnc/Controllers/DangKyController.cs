@@ -15,28 +15,35 @@ namespace demo_csdlnc.Controllers
         {
             _context = context;
         }
-
-        // 🔹 1. Hiển thị danh sách đăng ký
         public IActionResult Index()
         {
-            var userRole = HttpContext.Session.GetString("Role");
-            var userAccountIdStr = HttpContext.Session.GetString("MaAccount");
+            var username = HttpContext.Session.GetString("Username");
+            var role = HttpContext.Session.GetString("Role");
+            var maAccount = HttpContext.Session.GetInt32("MaAccount");
 
-            IQueryable<DangKy> dangKys = _context.DangKys
-                .Include(dk => dk.SinhVien)
-                .Include(dk => dk.NguoiXetDuyet);
-
-            if (userRole == "SinhVien" && int.TryParse(userAccountIdStr, out int userAccountId))
+            if (string.IsNullOrEmpty(username))
             {
-                dangKys = dangKys.Where(dk => dk.MaSV == userAccountId);
+                return RedirectToAction("Login", "Account");
             }
 
-            return View(dangKys.ToList());
+            IQueryable<DangKy> ketQuas = _context.DangKys.Include(k => k.SinhVien).Include(k => k.NguoiXetDuyet);
+
+            if (role == "SinhVien")
+            {
+                var sinhVien = _context.SinhViens.FirstOrDefault(s => s.MaAccount == maAccount);
+                if (sinhVien != null)
+                {
+                    ketQuas = ketQuas.Where(k => k.MaSV == sinhVien.MaSV);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "DangKy");
+                }
+            }
+
+            return View(ketQuas.ToList());
         }
 
-
-
-        // 🔹 2. Xem chi tiết đăng ký
         public IActionResult Details(int id)
         {
             var dangKy = _context.DangKys
@@ -52,19 +59,32 @@ namespace demo_csdlnc.Controllers
             return View(dangKy);
         }
 
-        // 🔹 3. Trang tạo đăng ký mới
-
         public IActionResult Create()
         {
-            var sinhViens = _context.SinhViens.ToList();
+            var username = HttpContext.Session.GetString("Username");
+            var maAccount = HttpContext.Session.GetInt32("MaAccount");
+
+            if (string.IsNullOrEmpty(username) || maAccount == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var sinhVien = _context.SinhViens.FirstOrDefault(s => s.MaSV == maAccount);
+            if (sinhVien == null)
+            {
+                return Forbid(); // Không cho phép nếu không tìm thấy sinh viên
+            }
+
             var nguoiXetDuyets = _context.NguoiXetDuyets.Include(n => n.Account).ToList();
 
-            ViewBag.MaSV = sinhViens.Any() ? new SelectList(sinhViens, "MaSV", "HoTen") : null;
-            ViewBag.MaNguoiXetDuyet = nguoiXetDuyets.Any() ? new SelectList(nguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username") : null;
+            ViewBag.MaSV = sinhVien.MaSV; // Gán MaSV của sinh viên từ Session
+            ViewBag.TenSV = sinhVien.HoTen; // Hiển thị tên sinh viên
+
+            ViewBag.MaNguoiXetDuyet = nguoiXetDuyets.Any() ?
+                new SelectList(nguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username") : null;
 
             return View();
         }
-
 
 
 
@@ -73,17 +93,21 @@ namespace demo_csdlnc.Controllers
         public IActionResult Create(DangKy dangKy)
         {
            
-                ViewBag.MaSV = new SelectList(_context.SinhViens, "MaSV", "HoTen");
-                ViewBag.MaNguoiXetDuyet = new SelectList(_context.NguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username");
+            ViewBag.MaSV = new SelectList(_context.SinhViens, "MaSV", "HoTen");
+            ViewBag.MaNguoiXetDuyet = new SelectList(_context.NguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username");
+            var maAccount = HttpContext.Session.GetInt32("MaAccount");
+            if (maAccount == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
+            dangKy.MaSV = maAccount.Value; // Gán MaSV từ Session
 
             dangKy.NgayDangKy = DateTime.Now;
             _context.DangKys.Add(dangKy);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // 🔹 4. Chỉnh sửa đăng ký
         public IActionResult Edit(int id)
         {
             if (HttpContext.Session.GetString("Role") != "Admin")
@@ -107,11 +131,11 @@ namespace demo_csdlnc.Controllers
             ViewBag.MaSV = new SelectList(sinhViens, "MaSV", "HoTen", dangKy.MaSV);
             ViewBag.MaNguoiXetDuyet = new SelectList(nguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username", dangKy.MaNguoiXetDuyet);
             ViewBag.TrangThaiList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "Chờ Duyệt", Text = "Chờ Duyệt" },
-        new SelectListItem { Value = "Đã Duyệt", Text = "Đã Duyệt" },
-        new SelectListItem { Value = "Đã Hủy", Text = "Đã Hủy" }
-    };
+            {
+                new SelectListItem { Value = "Chờ Duyệt", Text = "Chờ Duyệt" },
+                new SelectListItem { Value = "Đã Duyệt", Text = "Đã Duyệt" },
+                new SelectListItem { Value = "Đã Hủy", Text = "Đã Hủy" }
+            };
 
             return View(dangKy);
         }
@@ -131,20 +155,18 @@ namespace demo_csdlnc.Controllers
                 return NotFound();
             }
 
-                var sinhViens = _context.SinhViens.ToList();
-                var nguoiXetDuyets = _context.NguoiXetDuyets.Include(x => x.Account).ToList();
+            var sinhViens = _context.SinhViens.ToList();
+            var nguoiXetDuyets = _context.NguoiXetDuyets.Include(x => x.Account).ToList();
 
-                ViewBag.MaSV = new SelectList(sinhViens, "MaSV", "HoTen", dangKy.MaSV);
-                ViewBag.MaNguoiXetDuyet = new SelectList(nguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username", dangKy.MaNguoiXetDuyet);
-                ViewBag.TrangThaiList = new List<SelectListItem>
-                {
-                    new SelectListItem { Value = "Chờ Duyệt", Text = "Chờ Duyệt" },
-                    new SelectListItem { Value = "Đã Duyệt", Text = "Đã Duyệt" },
-                    new SelectListItem { Value = "Đã Hủy", Text = "Đã Hủy" }
-                };
+            ViewBag.MaSV = new SelectList(sinhViens, "MaSV", "HoTen", dangKy.MaSV);
+            ViewBag.MaNguoiXetDuyet = new SelectList(nguoiXetDuyets, "MaNguoiXetDuyet", "Account.Username", dangKy.MaNguoiXetDuyet);
+            ViewBag.TrangThaiList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Chờ Duyệt", Text = "Chờ Duyệt" },
+                new SelectListItem { Value = "Đã Duyệt", Text = "Đã Duyệt" },
+                new SelectListItem { Value = "Đã Hủy", Text = "Đã Hủy" }
+            };
 
-              
-            
 
             var existingDangKy = _context.DangKys.Find(id);
             if (existingDangKy == null)

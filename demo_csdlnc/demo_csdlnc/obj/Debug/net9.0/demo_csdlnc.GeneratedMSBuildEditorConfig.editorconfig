@@ -60,6 +60,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/KetQua/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2V0UXVhXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/KetQua/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2V0UXVhXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/KetQua/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2V0UXVhXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/KetQua/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2V0UXVhXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/KetQua/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2V0UXVhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/NguoiXetDuyet/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmd1b2lYZXREdXlldFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -78,6 +98,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/SinhVien/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2luaFZpZW5cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/SinhVien/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2luaFZpZW5cRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/SinhVien/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2luaFZpZW5cRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/SinhVien/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2luaFZpZW5cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/FPT/Downloads/demo_csdlnc/demo_csdlnc/demo_csdlnc/Views/SinhVien/Index.cshtml]
